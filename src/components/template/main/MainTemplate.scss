@@ -1,0 +1,8 @@
+@import "~assets/styles/main";
+
+.page-template {
+  display: flex;
+  flex-direction: column;
+  background-color: $template;
+  height: 100vh;
+}

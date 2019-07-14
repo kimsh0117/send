@@ -1,0 +1,125 @@
+@import "~assets/styles/main";
+
+.sending {
+  margin-top: 20px;
+  width: 800px;
+  height: 630px;
+  background: $sending__background;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  display: flex;
+  padding: 30px 30px 0 30px;
+  flex-direction: column;
+
+  .sending__title {
+    font-size: 30px;
+    line-height: 40px;
+    width: 693px;
+    height: 40px;
+  }
+  .sending__from,
+  .sending__for,
+  .sending__theme,
+  .sending__message {
+    margin-top: 20px;
+    width: 740px;
+
+    label {
+      font-size: 16px;
+      line-height: 20px;
+      height: 20px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    .inputs {
+      height: 40px;
+      margin-top: 5px;
+      
+      input:focus {
+        outline: none;
+        transition: .5s;
+      }
+
+      .inputs__name,
+      .inputs__email {
+        width: 50%;
+        height: 40px;
+        border: 1px solid #DDDDDD;
+        box-sizing: border-box;
+        padding: 5px 10px;
+      }
+
+      .inputs__name {
+        border-right: none;
+        border-radius: 5px 0 0 5px;
+      }
+
+      .inputs__email {
+        border-radius: 0 5px 5px 0;
+      }
+    }
+    .errMsg {
+      width: 740px;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  .sending__from,
+  .sending__for {
+    .errMsg {
+      p {
+        width: 50%;
+        padding: 5px 10px;
+
+
+        
+      }
+    }
+  }
+  .sending__theme,
+  .sending__message {
+    input,
+    textarea {
+      border: 1px solid #DDDDDD;
+      box-sizing: border-box;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  }
+  .sending__theme {
+    .inputs__theme {
+      height: 40px;
+      width: 100%;
+    }
+  }
+  .sending__message {
+    .inputs__message {
+      height: 140px;
+      resize: none;
+    }
+    .inputs__message:focus {
+      outline: none;
+    }
+  }
+  .sending__attachment {
+    width: 250px;
+    height: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+
+    img {
+      width: 16.12px;
+      height: 14.71px;
+      margin-right: 5.44px;
+    }
+
+    span {
+      font-size: 16px;
+      line-height: 20px;
+      color: #0055FB;
+      cursor: pointer;
+    }
+  }
+}

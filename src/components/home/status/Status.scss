@@ -1,0 +1,13 @@
+.status {
+  margin-top: 50px;
+  width: 800px;
+  display: flex;
+  justify-content: center;
+
+  .status__title {
+    width: 740px;
+    height: 30px;
+    font-size: 24px;
+    line-height: 30px;
+  }
+}
