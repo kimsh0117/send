@@ -17,17 +17,19 @@ const Home = ({
   messages
 }) => (
     <Responsive>
-      {status === false ? (
-      <Sending
-        changeInput={changeInput}
-        validationCheck={validationCheck}
-        valCheckMsg={valCheckMsg}
-        checkAll={checkAll}
-        send={send}
-      />) : <Progress emailfor={emailfor}/>}
-      <Status
-        messages={messages}
-      />
+      <div className="home">
+        {status === false ? (
+        <Sending
+          changeInput={changeInput}
+          validationCheck={validationCheck}
+          valCheckMsg={valCheckMsg}
+          checkAll={checkAll}
+          send={send}
+        />) : <Progress emailfor={emailfor}/>}
+        <Status
+          messages={messages}
+        />
+      </div>
     </Responsive>
   );
 

@@ -8,5 +8,13 @@ export const sendEmail = (letter, mca) =>
       sendwhen: "test",
       mca
     })
-    .then(res => res)
-    .catch(err => err);
+    .then(res => res);
+
+export const checkStatus = trackid =>
+  sendsay
+    .request({
+      action: "track.get",
+      id: trackid,
+      session: sendsay.session
+    })
+    .then(res => res);

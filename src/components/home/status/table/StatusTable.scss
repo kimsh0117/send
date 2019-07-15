@@ -32,6 +32,12 @@
       td:nth-child(3) {
         text-align: right;
       }
+      .status--failure {
+        color:#FF6666ed;
+      }
+      .status--success {
+        color: #03A100;
+      }
     }
   }
 }

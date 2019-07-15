@@ -10,3 +10,4 @@ function createRequestTypes(base) {
 }
 
 export const POST_SENDEMAIL = createRequestTypes("POST_SENDEMAIL");
+export const POST_CHECKSTATUS = createRequestTypes("POST_CHECKSTATUS");

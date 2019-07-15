@@ -2,6 +2,7 @@ import React from "react";
 import "./StatusTable.scss";
 
 const StatusTable = ({ messages }) => {
+  const status = ["В очереди", "Отправлено", "Ошибка"];
   return (
     <table className="statustable">
       <thead>
@@ -16,14 +17,22 @@ const StatusTable = ({ messages }) => {
           <tr key={i}>
             <td>{msg.date}</td>
             <td>{msg.theme}</td>
-            <td>{msg.status}</td>
+            <td
+              className={
+                msg.status === 0
+                  ? ""
+                  : msg.status === 2
+                  ? "status--failure"
+                  : "status--success"
+              }
+            >
+              {status[msg.status]}
+            </td>
           </tr>
         ))}
       </tbody>
     </table>
-  )
-}
-
-
+  );
+};
 
 export default StatusTable;
