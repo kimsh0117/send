@@ -5,12 +5,20 @@ import Status from "./status";
 
 import "./Home.scss";
 
-const Home = ({ changeInput, validationCheck, valCheckMsg }) => (
+const Home = ({
+  changeInput,
+  validationCheck,
+  valCheckMsg,
+  checkAll,
+  send
+}) => (
   <Responsive>
     <Sending
       changeInput={changeInput}
       validationCheck={validationCheck}
       valCheckMsg={valCheckMsg}
+      checkAll={checkAll}
+      send={send}
     />
     <Status />
   </Responsive>

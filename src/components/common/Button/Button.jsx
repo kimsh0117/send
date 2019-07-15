@@ -9,7 +9,7 @@ const Button = ({
   onClick,
   ...rest
 }) => {
-  const processedClass = cn("button", className);
+  const processedClass = cn(className);
   return to ? (
     <Link className={processedClass} to={to} {...rest} />
   ) : (

@@ -1,1 +1,1 @@
-export { default as clu180 } from 'lib/api/clu180';
+export { sendEmail } from "lib/api/sendemail";

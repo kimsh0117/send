@@ -1,5 +1,5 @@
 import * as React from "react";
-import { rootState } from "store/reducers";
+import { sendEmailAction } from "store/actions";
 import { connect } from "react-redux";
 import { Home } from "components";
 
@@ -13,11 +13,14 @@ class HomeContainer extends React.Component {
       emailfor: "",
       theme: "",
       content: "",
-      valCheckMsg: ["", "", "", ""],
-      checkall: false
+      attaches: [],
+      valCheckMsg: ["", "", "", "", "", ""],
+      checkAll: false
     };
     this.changeInput = this.changeInput.bind(this);
     this.validationCheck = this.validationCheck.bind(this);
+    this.beforeSend = this.beforeSend.bind(this);
+    this.send = this.send.bind(this);
   }
   changeInput = (num, e) => {
     const checkMsg = [
@@ -40,13 +43,14 @@ class HomeContainer extends React.Component {
         ...this.state.valCheckMsg.slice(num + 1)
       ],
       emailCheck = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/,
+      nameCheck = /^[a-zA-Zа-яА-Я]*$/,
       value = e.target.value;
 
     switch (num) {
       case 0:
         if (value === "") {
           checkMsg[num] = "Имя не может быть пустым";
-        } else if (false) {
+        } else if (!nameCheck.test(value)) {
           checkMsg[num] = "Please enter correct name format";
         }
         break;
@@ -59,12 +63,26 @@ class HomeContainer extends React.Component {
         break;
       case 2:
         if (value === "") {
+          checkMsg[num] = "Имя не может быть пустым";
+        } else if (!nameCheck.test(value)) {
+          checkMsg[num] = "Please enter correct name format";
+        }
+        break;
+      case 3:
+        if (value === "") {
+          checkMsg[num] = "Email не может быть пустым";
+        } else if (!emailCheck.test(value)) {
+          checkMsg[num] = "Please enter correct email format";
+        }
+        break;
+      case 4:
+        if (value === "") {
           checkMsg[num] = "Тема письма не может быть пустым";
         } else if (false) {
           checkMsg[num] = "Please enter correct theme format";
         }
         break;
-      case 3:
+      case 5:
         if (value === "") {
           checkMsg[num] = "Сообщение не может быть пустым";
         } else if (false) {
@@ -78,8 +96,31 @@ class HomeContainer extends React.Component {
       {
         valCheckMsg: checkMsg
       },
-      this.beforeAuth
+      this.beforeSend
     );
+  };
+  beforeSend = () => {
+    if (this.state.valCheckMsg.every(msg => msg === "")) {
+      this.setState({
+        checkAll: true
+      });
+    } else {
+      this.setState({
+        checkAll: false
+      });
+    }
+  };
+  send = () => {
+    let { theme, namefrom, emailfrom, namefor, emailfor, content } = this.state,
+      letter = {
+        subject: theme,
+        "from.name": namefrom,
+        "from.email": emailfrom,
+        "to.name": namefor,
+        message: { text: content }
+      },
+      mca = [emailfor];
+    this.props.sendEmail(letter, mca);
   };
   render() {
     return (
@@ -88,18 +129,21 @@ class HomeContainer extends React.Component {
           changeInput={this.changeInput}
           validationCheck={this.validationCheck}
           valCheckMsg={this.state.valCheckMsg}
+          checkAll={this.state.checkAll}
+          send={this.send}
         />
       </>
     );
   }
 }
 
-const mapStateToProps = rootState => ({});
-
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  sendEmail: (letter, mca) =>
+    dispatch(sendEmailAction.sendEmailRequest(letter, mca))
+});
 
 const connectModule = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(HomeContainer);
 
