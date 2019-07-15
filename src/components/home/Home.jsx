@@ -2,6 +2,7 @@ import React from "react";
 import { Responsive } from "components/common";
 import Sending from "./sending";
 import Status from "./status";
+import Progress from "./progress";
 
 import "./Home.scss";
 
@@ -10,18 +11,24 @@ const Home = ({
   validationCheck,
   valCheckMsg,
   checkAll,
-  send
+  send,
+  emailfor,
+  status,
+  messages
 }) => (
-  <Responsive>
-    <Sending
-      changeInput={changeInput}
-      validationCheck={validationCheck}
-      valCheckMsg={valCheckMsg}
-      checkAll={checkAll}
-      send={send}
-    />
-    <Status />
-  </Responsive>
-);
+    <Responsive>
+      {status === false ? (
+      <Sending
+        changeInput={changeInput}
+        validationCheck={validationCheck}
+        valCheckMsg={valCheckMsg}
+        checkAll={checkAll}
+        send={send}
+      />) : <Progress emailfor={emailfor}/>}
+      <Status
+        messages={messages}
+      />
+    </Responsive>
+  );
 
 export default Home;

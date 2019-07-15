@@ -1,0 +1,11 @@
+import React from 'react';
+import './Progress.scss';
+
+const Progress = ({ emailfor }) => (
+  <div className="progress">
+    <h1>Сообщение поставлено в очередь на отправку</h1>
+    <div>Совсем скоро сообщение вылетит из сервера, и будет двигаться в сторону почты получателя <strong>{emailfor}</strong> со скоростью электронов.</div>
+  </div>
+)
+
+export default Progress;

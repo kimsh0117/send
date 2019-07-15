@@ -3,11 +3,18 @@
   width: 800px;
   display: flex;
   justify-content: center;
-
+  flex-direction: column;
+  padding: 0 30px;
   .status__title {
     width: 740px;
     height: 30px;
     font-size: 24px;
     line-height: 30px;
+  }
+
+  .status__message {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 25px
   }
 }

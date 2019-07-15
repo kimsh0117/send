@@ -6,9 +6,9 @@ const sendEmailRequest = (letter, mca) => ({
   mca
 });
 
-const sendEmailSuccess = paylaod => ({
+const sendEmailSuccess = payload => ({
   type: POST_SENDEMAIL[SUCCESS],
-  paylaod
+  payload
 });
 
 const sendEmailFailure = err => ({

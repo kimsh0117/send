@@ -120,22 +120,36 @@ class HomeContainer extends React.Component {
         message: { text: content }
       },
       mca = [emailfor];
+    // trigger dispatch
     this.props.sendEmail(letter, mca);
   };
   render() {
+    let {emailfor, status, messages} = this.props;
     return (
       <>
         <Home
+          // methods
           changeInput={this.changeInput}
           validationCheck={this.validationCheck}
+          send={this.send}
+          // states
           valCheckMsg={this.state.valCheckMsg}
           checkAll={this.state.checkAll}
-          send={this.send}
+          // props
+          emailfor={emailfor}
+          status={status}
+          messages={messages}
         />
       </>
     );
   }
 }
+
+const mapStateToProps = rootState => ({
+  emailfor: rootState.send.emailfor,
+  status: rootState.send.sending,
+  messages: rootState.send.messages
+})
 
 const mapDispatchToProps = dispatch => ({
   sendEmail: (letter, mca) =>
@@ -143,7 +157,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const connectModule = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(HomeContainer);
 
