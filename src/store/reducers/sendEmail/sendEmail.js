@@ -9,7 +9,7 @@ import {
 const initialState = {
   messages: [],
   sending: false,
-  emailfor: "send@send.com",
+  emailfor: "",
   errMsg: ""
 };
 
