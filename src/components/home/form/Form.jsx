@@ -122,7 +122,9 @@ const Form = ({
       </div>
       <Button
         disabled={checkAll === false}
-        className={checkAll === true ? "button-active" : "button-disable"}
+        className={
+          checkAll === true ? "button-active" : "button-disable"
+        }
         onClick={send}
       >
         Отправить

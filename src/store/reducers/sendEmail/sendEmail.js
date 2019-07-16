@@ -57,8 +57,10 @@ export default function(state = initialState, action) {
         errMsg: action.err
       };
     case POST_CHECKSTATUS[SUCCESS]:
-      let objIndex = state.messages.findIndex(obj => obj["track.id"] === action.payload.id);
-      if (action.payload.status === -1 ) {
+      let objIndex = state.messages.findIndex(
+        obj => obj["track.id"] === action.payload.id
+      );
+      if (action.payload.status === -1) {
         state.messages[objIndex].status = 1;
         return {
           ...state,
@@ -66,7 +68,7 @@ export default function(state = initialState, action) {
           messages: [...state.messages]
         };
       }
-      if(action.payload.status < -1) {
+      if (action.payload.status < -1) {
         state.messages[objIndex].status = 2;
         return {
           ...state,

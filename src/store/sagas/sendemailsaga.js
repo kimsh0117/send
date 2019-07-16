@@ -1,10 +1,4 @@
-import {
-  call,
-  put,
-  takeLatest,
-  all,
-  fork
-} from "redux-saga/effects";
+import { call, put, takeLatest, all, fork } from "redux-saga/effects";
 // import { eventChannel, END } from "redux-saga";
 import { sendEmail, checkStatus } from "lib/api";
 import { sendEmailAction } from "store/actions";
@@ -56,7 +50,7 @@ export function* fetchCheckStatus(id) {
     //   );
     // });
     let count = 0;
-    while(count > -1) {
+    while (count > -1) {
       const result = yield call(checkStatus, id);
       yield put(
         sendEmailAction.checkStatusSuccess({

@@ -3,13 +3,8 @@ import { Link } from "react-router-dom";
 import cn from "classnames";
 import "./Button.scss";
 
-const Button = ({
-  className,
-  to,
-  onClick,
-  ...rest
-}) => {
-  const processedClass = cn(className);
+const Button = ({ className, to, onClick, ...rest }) => {
+  const processedClass = cn('button', className);
   return to ? (
     <Link className={processedClass} to={to} {...rest} />
   ) : (

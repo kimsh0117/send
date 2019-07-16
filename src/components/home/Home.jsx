@@ -19,9 +19,9 @@ const Home = ({
   attaches,
   fileDelete
 }) => (
-    <Responsive>
-      <div className="home">
-        {status === false ? (
+  <Responsive>
+    <div className="home">
+      {status === false ? (
         <Form
           changeInput={changeInput}
           validationCheck={validationCheck}
@@ -31,12 +31,13 @@ const Home = ({
           fileUploadClick={fileUploadClick}
           attaches={attaches}
           fileDelete={fileDelete}
-        />) : <Progress emailfor={emailfor}/>}
-        <Status
-          messages={messages}
         />
-      </div>
-    </Responsive>
-  );
+      ) : (
+        <Progress emailfor={emailfor} />
+      )}
+      <Status messages={messages} />
+    </div>
+  </Responsive>
+);
 
 export default Home;

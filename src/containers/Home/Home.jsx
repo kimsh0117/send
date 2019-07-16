@@ -161,7 +161,13 @@ class HomeContainer extends React.Component {
               encoding: "base64"
             }
           ],
-          sizes: [...this.state.sizes, files.size]
+          sizes: [
+            ...this.state.sizes,
+            {
+              name: files.name,
+              size: files.size
+            }
+          ]
         });
       };
       reader.onerror = error => console.log("Error: ", error);
@@ -173,13 +179,14 @@ class HomeContainer extends React.Component {
   // DELETE FILE
   fileDelete = filename => {
     this.setState({
-      attaches: this.state.attaches.filter(file => file.name !== filename)
+      attaches: this.state.attaches.filter(file => file.name !== filename),
+      sizes: this.state.sizes.filter(size => size.name !== filename)
     });
   };
   //CALCULATE TOTAL FILES CAPACITY
   totalCapacity = sizes =>
     sizes.reduce((acc, value) => {
-      return acc + value;
+      return acc + value.size;
     }, 0);
 
   render() {
