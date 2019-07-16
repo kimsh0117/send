@@ -43,7 +43,7 @@ Sendsay front-end test.
 
 
 ## Deploy
-[Netlify](https://nostalgic-kepler-363d85.netlify.com/)
+[Netlify](https://gracious-hawking-e8c7c6.netlify.com/)
 
 ## Available Scripts
 
