@@ -8,7 +8,8 @@ const Form = ({
   validationCheck,
   valCheckMsg,
   checkAll,
-  send
+  send,
+  fileUploadClick
 }) => {
   return (
     <div className="form">
@@ -94,8 +95,11 @@ const Form = ({
         </div>
       </div>
       <div className="form__attachment">
-        <img src={clip} alt="clip" />
-        <span>Прикрепить файл</span>
+        <label className="form__attachment__file">
+          <img src={clip} alt="clip" />
+          <input type="file" multiple accept="image/*,.doc,.docx,.xls,.xlsx,application/pdf,application/zip" onChange={fileUploadClick} />
+          Прикрепить файл
+        </label>
       </div>
       <Button
         disabled={checkAll === false}

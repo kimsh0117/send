@@ -13,6 +13,7 @@ class HomeContainer extends React.Component {
       emailfor: "",
       theme: "",
       content: "",
+      selectedFile: null,
       attaches: [],
       valCheckMsg: ["", "", "", "", "", ""],
       checkAll: false
@@ -21,6 +22,7 @@ class HomeContainer extends React.Component {
     this.validationCheck = this.validationCheck.bind(this);
     this.beforeSend = this.beforeSend.bind(this);
     this.send = this.send.bind(this);
+    this.fileUploadClick = this.fileUploadClick.bind(this);
   }
   changeInput = (num, e) => {
     const checkMsg = [
@@ -123,6 +125,13 @@ class HomeContainer extends React.Component {
     // trigger dispatch
     this.props.sendEmail(letter, mca);
   };
+  // --------------------- ADDING FILES THROUGH THE BUTTON-----------------------------
+  fileUploadClick = (e) => {
+    console.log(e.target.files[0])
+    this.setState({
+      selectedFile: e.target.files[0],
+    })
+  }
   render() {
     let {emailfor, status, messages} = this.props;
     return (
@@ -132,6 +141,7 @@ class HomeContainer extends React.Component {
           changeInput={this.changeInput}
           validationCheck={this.validationCheck}
           send={this.send}
+          fileUploadClick={this.fileUploadClick}
           // states
           valCheckMsg={this.state.valCheckMsg}
           checkAll={this.state.checkAll}
