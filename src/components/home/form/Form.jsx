@@ -1,9 +1,9 @@
 import React from "react";
 import { clip } from "assets/img";
 import { Button } from "components/common";
-import "./Sending.scss";
+import "./Form.scss";
 
-const Sending = ({
+const Form = ({
   changeInput,
   validationCheck,
   valCheckMsg,
@@ -11,9 +11,9 @@ const Sending = ({
   send
 }) => {
   return (
-    <div className="sending">
-      <div className="sending__title">Отправлялка сообщений</div>
-      <div className="sending__from">
+    <div className="form">
+      <div className="form__title">Отправлялка сообщений</div>
+      <div className="form__from">
         <label>От кого</label>
         <div className="inputs">
           <input
@@ -38,7 +38,7 @@ const Sending = ({
           <p>{valCheckMsg[1]}</p>
         </div>
       </div>
-      <div className="sending__for">
+      <div className="form__for">
         <label>Кому</label>
         <div className="inputs">
           <input
@@ -63,7 +63,7 @@ const Sending = ({
           <p>{valCheckMsg[3]}</p>
         </div>
       </div>
-      <div className="sending__theme">
+      <div className="form__theme">
         <label>Тема письма</label>
         <div className="inputs">
           <input
@@ -79,7 +79,7 @@ const Sending = ({
           <p>{valCheckMsg[4]}</p>
         </div>
       </div>
-      <div className="sending__message">
+      <div className="form__message">
         <label>Сообщение</label>
         <textarea
           id="content"
@@ -93,7 +93,7 @@ const Sending = ({
           <p>{valCheckMsg[5]}</p>
         </div>
       </div>
-      <div className="sending__attachment">
+      <div className="form__attachment">
         <img src={clip} alt="clip" />
         <span>Прикрепить файл</span>
       </div>
@@ -108,4 +108,4 @@ const Sending = ({
   );
 };
 
-export default Sending;
+export default Form;

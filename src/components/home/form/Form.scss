@@ -1,6 +1,6 @@
 @import "~assets/styles/main";
 
-.sending {
+.form {
   margin-top: 20px;
   width: 800px;
   height: 720px;
@@ -11,16 +11,16 @@
   padding: 30px 30px 0 30px;
   flex-direction: column;
 
-  .sending__title {
+  .form__title {
     font-size: 30px;
     line-height: 40px;
     width: 693px;
     height: 40px;
   }
-  .sending__from,
-  .sending__for,
-  .sending__theme,
-  .sending__message {
+  .form__from,
+  .form__for,
+  .form__theme,
+  .form__message {
     margin-top: 20px;
     width: 740px;
 
@@ -66,8 +66,8 @@
       }
     }
   }
-  .sending__from,
-  .sending__for {
+  .form__from,
+  .form__for {
     .errMsg {
       p {
         width: 50%;
@@ -75,8 +75,8 @@
       }
     }
   }
-  .sending__theme,
-  .sending__message {
+  .form__theme,
+  .form__message {
     input,
     textarea {
       border: 1px solid #DDDDDD;
@@ -91,13 +91,13 @@
       }
     }
   }
-  .sending__theme {
+  .form__theme {
     .inputs__theme {
       height: 40px;
       width: 100%;
     }
   }
-  .sending__message {
+  .form__message {
     .inputs__message {
       height: 140px;
       resize: none;
@@ -106,7 +106,7 @@
       outline: none;
     }
   }
-  .sending__attachment {
+  .form__attachment {
     width: 250px;
     height: 20px;
     margin-top: 10px;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Responsive } from "components/common";
-import Sending from "./sending";
+import Form from "./form";
 import Status from "./status";
 import Progress from "./progress";
 
@@ -19,7 +19,7 @@ const Home = ({
     <Responsive>
       <div className="home">
         {status === false ? (
-        <Sending
+        <Form
           changeInput={changeInput}
           validationCheck={validationCheck}
           valCheckMsg={valCheckMsg}
