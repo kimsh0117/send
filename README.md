@@ -1,8 +1,8 @@
 # Sendsay
 Sendsay front-end test.
 
-## Root Endpoint
-[Backend API](https://api.sendsay.ru/clu180)
+## Sendsay Javascript Client
+[Official Sendsay API Documentation (Russian)](https://github.com/sendsay-ru/sendsay-api-js)
 
 ## Tech Stack
 - [React](https://reactjs.org/)
