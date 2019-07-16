@@ -13,8 +13,8 @@ class HomeContainer extends React.Component {
       emailfor: "",
       theme: "",
       content: "",
-      selectedFile: null,
       attaches: [],
+      sizes: [],
       valCheckMsg: ["", "", "", "", "", ""],
       checkAll: false
     };
@@ -23,6 +23,7 @@ class HomeContainer extends React.Component {
     this.beforeSend = this.beforeSend.bind(this);
     this.send = this.send.bind(this);
     this.fileUploadClick = this.fileUploadClick.bind(this);
+    this.totalCapacity = this.totalCapacity.bind(this);
   }
   changeInput = (num, e) => {
     const checkMsg = [
@@ -40,10 +41,10 @@ class HomeContainer extends React.Component {
   };
   validationCheck = (num, e) => {
     const checkMsg = [
-        ...this.state.valCheckMsg.slice(0, num),
-        "",
-        ...this.state.valCheckMsg.slice(num + 1)
-      ],
+      ...this.state.valCheckMsg.slice(0, num),
+      "",
+      ...this.state.valCheckMsg.slice(num + 1)
+    ],
       emailCheck = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/,
       nameCheck = /^[a-zA-Zа-яА-Я]*$/,
       value = e.target.value;
@@ -125,15 +126,33 @@ class HomeContainer extends React.Component {
     // trigger dispatch
     this.props.sendEmail(letter, mca);
   };
-  // --------------------- ADDING FILES THROUGH THE BUTTON-----------------------------
+  // --------------------- ADDING FILES THROUGH THE BUTTON -----------------------------
   fileUploadClick = (e) => {
-    console.log(e.target.files[0])
-    this.setState({
-      selectedFile: e.target.files[0],
-    })
+    let files = e.target.files[0];
+    if (files.size < 5120 && this.totalCapacity(this.state.sizes) < 20480) {
+      let reader = new FileReader();
+      reader.onload = e => {
+        this.setState({
+          attaches: [...this.state.attaches, {
+            name: files.name,
+            content: e.target.result,
+            encoding: "base64"
+          }],
+          sizes: [...this.state.sizes, files.size]
+        })
+      }
+      reader.onerror = error => console.log('Error: ', error);
+      reader.readAsDataURL(files);
+    } else {
+      console.log('File is too large');
+    }
   }
+  // ---------------------     CALCULATE TOTAL CAPACITY    -----------------------------
+  totalCapacity = (sizes) => sizes.reduce((acc, value) => {
+    return acc + value;
+  }, 0)
   render() {
-    let {emailfor, status, messages} = this.props;
+    let { emailfor, status, messages } = this.props;
     return (
       <>
         <Home
@@ -145,6 +164,7 @@ class HomeContainer extends React.Component {
           // states
           valCheckMsg={this.state.valCheckMsg}
           checkAll={this.state.checkAll}
+          attaches={this.state.attaches}
           // props
           emailfor={emailfor}
           status={status}

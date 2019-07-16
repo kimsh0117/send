@@ -15,7 +15,8 @@ const Home = ({
   emailfor,
   status,
   messages,
-  fileUploadClick
+  fileUploadClick,
+  attaches
 }) => (
     <Responsive>
       <div className="home">
@@ -27,6 +28,7 @@ const Home = ({
           checkAll={checkAll}
           send={send}
           fileUploadClick={fileUploadClick}
+          attaches={attaches}
         />) : <Progress emailfor={emailfor}/>}
         <Status
           messages={messages}

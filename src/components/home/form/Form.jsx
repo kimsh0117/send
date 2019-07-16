@@ -9,7 +9,8 @@ const Form = ({
   valCheckMsg,
   checkAll,
   send,
-  fileUploadClick
+  fileUploadClick,
+  attaches
 }) => {
   return (
     <div className="form">
@@ -94,10 +95,14 @@ const Form = ({
           <p>{valCheckMsg[5]}</p>
         </div>
       </div>
+      {/* attaches */}
+      <div className="form__files">
+
+      </div>
       <div className="form__attachment">
         <label className="form__attachment__file">
           <img src={clip} alt="clip" />
-          <input type="file" multiple accept="image/*,.doc,.docx,.xls,.xlsx,application/pdf,application/zip" onChange={fileUploadClick} />
+          <input type="file" accept="image/*,.doc,.docx,.xls,.xlsx,application/pdf,application/zip, .txt" onChange={fileUploadClick} />
           Прикрепить файл
         </label>
       </div>
