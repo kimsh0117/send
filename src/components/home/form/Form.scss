@@ -100,10 +100,61 @@
   .form__message {
     .inputs__message {
       height: 140px;
+      width: 100%;
       resize: none;
     }
     .inputs__message:focus {
       outline: none;
+    }
+  }
+  .form__files {
+    width: 740px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .form__files__item {
+      width: 365px;
+      height: 50px;
+      border: 1px solid #DDDDDD;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 10px 0;
+      display: flex;
+      flex-direction: row;
+
+      .form__files__item__img {
+        width: 32.24px;
+        height: 29.41px;
+        margin-left: 10.87px;
+
+      }
+      .form__files__item__name {
+        width: 198px;
+        height: 30px;
+        text-align: left;
+        font-size: 16px;
+        margin-left: 15.89px;
+        padding-top: 7px;
+        text-overflow:ellipsis;
+      }
+      .form__files__item__delete {
+        margin-left: 11px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #FF6666;
+        cursor: pointer;
+        &:hover {
+          opacity: .7;
+        }
+        img {
+          width: 13px;
+          height: 16px;
+          margin-right: 5px;
+        }
+      }
     }
   }
   .form__attachment {

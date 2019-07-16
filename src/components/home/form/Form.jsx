@@ -1,5 +1,5 @@
 import React from "react";
-import { clip } from "assets/img";
+import { clip, clipbig, trash } from "assets/img";
 import { Button } from "components/common";
 import "./Form.scss";
 
@@ -10,7 +10,8 @@ const Form = ({
   checkAll,
   send,
   fileUploadClick,
-  attaches
+  attaches,
+  fileDelete
 }) => {
   return (
     <div className="form">
@@ -86,8 +87,6 @@ const Form = ({
         <textarea
           id="content"
           className="inputs__message"
-          required
-          cols="117"
           onChange={e => changeInput(5, e)}
           onBlur={e => validationCheck(5, e)}
         />
@@ -95,14 +94,29 @@ const Form = ({
           <p>{valCheckMsg[5]}</p>
         </div>
       </div>
-      {/* attaches */}
       <div className="form__files">
-
+        {attaches.map(attach => (
+          <div className="form__files__item" key={attach.name}>
+            <img src={clipbig} alt="clip" className="form__files__item__img" />
+            <div className="form__files__item__name">{attach.name}</div>
+            <div
+              className="form__files__item__delete"
+              onClick={() => fileDelete(attach.name)}
+            >
+              <img src={trash} alt="trash" />
+              <p>Удалить</p>
+            </div>
+          </div>
+        ))}
       </div>
       <div className="form__attachment">
         <label className="form__attachment__file">
           <img src={clip} alt="clip" />
-          <input type="file" accept="image/*,.doc,.docx,.xls,.xlsx,application/pdf,application/zip, .txt" onChange={fileUploadClick} />
+          <input
+            type="file"
+            accept="image/*,.doc,.docx,.xls,.xlsx,application/pdf,application/zip,.txt,.rtf"
+            onChange={fileUploadClick}
+          />
           Прикрепить файл
         </label>
       </div>

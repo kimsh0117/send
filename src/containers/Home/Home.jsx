@@ -24,6 +24,7 @@ class HomeContainer extends React.Component {
     this.send = this.send.bind(this);
     this.fileUploadClick = this.fileUploadClick.bind(this);
     this.totalCapacity = this.totalCapacity.bind(this);
+    this.fileDelete = this.fileDelete.bind(this);
   }
   changeInput = (num, e) => {
     const checkMsg = [
@@ -41,10 +42,10 @@ class HomeContainer extends React.Component {
   };
   validationCheck = (num, e) => {
     const checkMsg = [
-      ...this.state.valCheckMsg.slice(0, num),
-      "",
-      ...this.state.valCheckMsg.slice(num + 1)
-    ],
+        ...this.state.valCheckMsg.slice(0, num),
+        "",
+        ...this.state.valCheckMsg.slice(num + 1)
+      ],
       emailCheck = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/,
       nameCheck = /^[a-zA-Zа-яА-Я]*$/,
       value = e.target.value;
@@ -114,43 +115,73 @@ class HomeContainer extends React.Component {
     }
   };
   send = () => {
-    let { theme, namefrom, emailfrom, namefor, emailfor, content } = this.state,
+    let {
+        theme,
+        namefrom,
+        emailfrom,
+        namefor,
+        emailfor,
+        content,
+        attaches
+      } = this.state,
       letter = {
         subject: theme,
         "from.name": namefrom,
         "from.email": emailfrom,
         "to.name": namefor,
-        message: { text: content }
+        message: { text: content },
+        attaches
       },
       mca = [emailfor];
     // trigger dispatch
     this.props.sendEmail(letter, mca);
+    this.setState({
+      namefrom: "",
+      emailfrom: "",
+      namefor: "",
+      emailfor: "",
+      theme: "",
+      content: "",
+      attaches: [],
+      sizes: []
+    });
   };
-  // --------------------- ADDING FILES THROUGH THE BUTTON -----------------------------
-  fileUploadClick = (e) => {
+  // TRIGGER FILE UPLOAD BUTTON
+  fileUploadClick = e => {
     let files = e.target.files[0];
     if (files.size < 5120 && this.totalCapacity(this.state.sizes) < 20480) {
       let reader = new FileReader();
       reader.onload = e => {
         this.setState({
-          attaches: [...this.state.attaches, {
-            name: files.name,
-            content: e.target.result,
-            encoding: "base64"
-          }],
+          attaches: [
+            ...this.state.attaches,
+            {
+              name: files.name,
+              content: e.target.result,
+              encoding: "base64"
+            }
+          ],
           sizes: [...this.state.sizes, files.size]
-        })
-      }
-      reader.onerror = error => console.log('Error: ', error);
+        });
+      };
+      reader.onerror = error => console.log("Error: ", error);
       reader.readAsDataURL(files);
     } else {
-      console.log('File is too large');
+      console.log("File is too large");
     }
-  }
-  // ---------------------     CALCULATE TOTAL CAPACITY    -----------------------------
-  totalCapacity = (sizes) => sizes.reduce((acc, value) => {
-    return acc + value;
-  }, 0)
+  };
+  // DELETE FILE
+  fileDelete = filename => {
+    this.setState({
+      attaches: this.state.attaches.filter(file => file.name !== filename)
+    });
+  };
+  //CALCULATE TOTAL FILES CAPACITY
+  totalCapacity = sizes =>
+    sizes.reduce((acc, value) => {
+      return acc + value;
+    }, 0);
+
   render() {
     let { emailfor, status, messages } = this.props;
     return (
@@ -161,6 +192,7 @@ class HomeContainer extends React.Component {
           validationCheck={this.validationCheck}
           send={this.send}
           fileUploadClick={this.fileUploadClick}
+          fileDelete={this.fileDelete}
           // states
           valCheckMsg={this.state.valCheckMsg}
           checkAll={this.state.checkAll}
@@ -179,7 +211,7 @@ const mapStateToProps = rootState => ({
   emailfor: rootState.send.emailfor,
   status: rootState.send.sending,
   messages: rootState.send.messages
-})
+});
 
 const mapDispatchToProps = dispatch => ({
   sendEmail: (letter, mca) =>
