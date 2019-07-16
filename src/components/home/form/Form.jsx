@@ -11,10 +11,19 @@ const Form = ({
   send,
   fileUploadClick,
   attaches,
-  fileDelete
+  fileDelete,
+  dropRef,
+  dragging
 }) => {
   return (
-    <div className="form">
+    <div className="form" ref={dropRef}>
+      <div className={dragging ? "form__dropzone" : "disabled"}>
+        <p className="form__dropzone__text">Бросайте файлы сюда, я ловлю</p>
+        <span className="form__dropzone__sub-text">
+          Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls, pdf) и
+          zip-архивы. Размеры файла до 5 МБ
+        </span>
+      </div>
       <div className="form__title">Отправлялка сообщений</div>
       <div className="form__from">
         <label>От кого</label>
@@ -122,9 +131,7 @@ const Form = ({
       </div>
       <Button
         disabled={checkAll === false}
-        className={
-          checkAll === true ? "button-active" : "button-disable"
-        }
+        className={checkAll === true ? "button-active" : "button-disable"}
         onClick={send}
       >
         Отправить

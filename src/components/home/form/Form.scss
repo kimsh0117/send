@@ -3,14 +3,45 @@
 .form {
   margin-top: 20px;
   width: 800px;
-  // height: 720px;
   background: $sending__background;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
   border-radius: 5px;
   display: flex;
   padding: 30px 30px 0 30px;
   flex-direction: column;
+  .disabled {
+    display: none;
+    visibility: hidden;
+  }
+  .form__dropzone {
+    width: 740px;
+    height: 606px;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.726);
+    border-radius: 5px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .5s;
+    border: 1px dashed #CCCCCC;
+    flex-direction: column;
 
+    .form__dropzone__text {
+      font-size: 30px;
+      line-height: 40px;
+      width: 693px;
+      height: 40px;
+      text-align: center;
+    }
+
+    .form__dropzone__sub-text {
+      width: 600px;
+      text-align: center;
+      font-size: 16px;
+      line-height: 25px;
+    }
+  }
   .form__title {
     font-size: 30px;
     line-height: 40px;
@@ -124,7 +155,7 @@
       display: flex;
       flex-direction: row;
       margin-top: 5px;
-      
+
       .form__files__item__img {
         width: 32.24px;
         height: 29.41px;

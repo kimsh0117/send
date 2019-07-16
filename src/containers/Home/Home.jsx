@@ -16,8 +16,12 @@ class HomeContainer extends React.Component {
       attaches: [],
       sizes: [],
       valCheckMsg: ["", "", "", "", "", ""],
-      checkAll: false
+      checkAll: false,
+      dragging: false
     };
+    // ref
+    this.dropRef = React.createRef();
+    // bind methods
     this.changeInput = this.changeInput.bind(this);
     this.validationCheck = this.validationCheck.bind(this);
     this.beforeSend = this.beforeSend.bind(this);
@@ -25,6 +29,26 @@ class HomeContainer extends React.Component {
     this.fileUploadClick = this.fileUploadClick.bind(this);
     this.totalCapacity = this.totalCapacity.bind(this);
     this.fileDelete = this.fileDelete.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
+    this.handleDragIn = this.handleDragIn.bind(this);
+    this.handleDragOut = this.handleDragOut.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
+    this.fileValidation = this.fileValidation.bind(this);
+  }
+  componentDidMount() {
+    let div = this.dropRef.current;
+    div.addEventListener("dragenter", this.handleDragIn);
+    div.addEventListener("dragleave", this.handleDragOut);
+    div.addEventListener("dragover", this.handleDrag);
+    div.addEventListener("drop", this.handleDrop);
+    this.dragCounter = 0;
+  }
+  componentWillUnmount() {
+    let div = this.dropRef.current;
+    div.removeEventListener("dragenter", this.handleDragIn);
+    div.removeEventListener("dragleave", this.handleDragOut);
+    div.removeEventListener("dragover", this.handleDrag);
+    div.removeEventListener("drop", this.handleDrop);
   }
   changeInput = (num, e) => {
     const checkMsg = [
@@ -146,9 +170,11 @@ class HomeContainer extends React.Component {
       sizes: []
     });
   };
-  // TRIGGER FILE UPLOAD BUTTON
   fileUploadClick = e => {
     let files = e.target.files[0];
+    this.fileValidation(files)
+  };
+  fileValidation = (files) => {
     if (files.size < 5120 && this.totalCapacity(this.state.sizes) < 20480) {
       let reader = new FileReader();
       reader.onload = e => {
@@ -175,20 +201,45 @@ class HomeContainer extends React.Component {
     } else {
       console.log("File is too large");
     }
-  };
-  // DELETE FILE
+  }
   fileDelete = filename => {
     this.setState({
       attaches: this.state.attaches.filter(file => file.name !== filename),
       sizes: this.state.sizes.filter(size => size.name !== filename)
     });
   };
-  //CALCULATE TOTAL FILES CAPACITY
   totalCapacity = sizes =>
     sizes.reduce((acc, value) => {
       return acc + value.size;
     }, 0);
-
+  handleDrag = e => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  handleDragIn = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.dragCounter++;
+    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+      this.setState({ dragging: true });
+    }
+  };
+  handleDragOut = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.dragCounter--;
+    if (this.dragCounter > 0) return;
+    this.setState({ dragging: false });
+  };
+  handleDrop = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    let files = e.dataTransfer.files[0];
+    this.setState({ dragging: false });
+    this.fileValidation(files)
+    e.dataTransfer.clearData();
+    this.dragCounter = 0;
+  };
   render() {
     let { emailfor, status, messages } = this.props;
     return (
@@ -200,10 +251,12 @@ class HomeContainer extends React.Component {
           send={this.send}
           fileUploadClick={this.fileUploadClick}
           fileDelete={this.fileDelete}
+          dropRef={this.dropRef}
           // states
           valCheckMsg={this.state.valCheckMsg}
           checkAll={this.state.checkAll}
           attaches={this.state.attaches}
+          dragging={this.state.dragging}
           // props
           emailfor={emailfor}
           status={status}

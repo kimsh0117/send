@@ -17,7 +17,9 @@ const Home = ({
   messages,
   fileUploadClick,
   attaches,
-  fileDelete
+  fileDelete,
+  dropRef,
+  dragging
 }) => (
   <Responsive>
     <div className="home">
@@ -31,6 +33,8 @@ const Home = ({
           fileUploadClick={fileUploadClick}
           attaches={attaches}
           fileDelete={fileDelete}
+          dropRef={dropRef}
+          dragging={dragging}
         />
       ) : (
         <Progress emailfor={emailfor} />
