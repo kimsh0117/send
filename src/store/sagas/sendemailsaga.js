@@ -39,7 +39,7 @@ export function* fetchSendEmail(action) {
 
 export function* fetchCheckStatus(id) {
   try {
-    const channel = yield call(countdown, 15);
+    const channel = yield call(countdown, 20);
     yield takeEvery(channel, function*(secs) {
       const result = yield call(checkStatus, id);
       yield put(

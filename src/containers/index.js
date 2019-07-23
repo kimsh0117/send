@@ -1,1 +1,3 @@
-export { default as HomeContainer } from "containers/Home";
+export { default as FormContainer } from "containers/Form";
+export { default as SendingContainer } from "containers/Sending";
+export { default as DragAndDropContainer } from "containers/DragAndDrop";

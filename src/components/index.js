@@ -4,8 +4,14 @@ export { default as App } from "components/App";
 // template
 export { MainTemplate } from "components/template";
 
-// Home
-export { default as Home } from "components/home";
-
 // Header
 export { default as Header } from 'components/header';
+
+// Status
+export { default as Status } from 'components/status';
+
+// Progress
+export { default as Progress } from 'components/progress';
+
+// Form
+export { default as Form } from 'components/form';
