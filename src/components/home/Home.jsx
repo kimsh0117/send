@@ -4,6 +4,9 @@ import Form from "./form";
 import Status from "./status";
 import Progress from "./progress";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./Home.scss";
 
 const Home = ({
@@ -22,6 +25,7 @@ const Home = ({
   dragging
 }) => (
   <Responsive>
+    <ToastContainer />
     <div className="home">
       {status === false ? (
         <Form

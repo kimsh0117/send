@@ -1,24 +1,24 @@
-import { call, put, takeLatest, all, fork } from "redux-saga/effects";
-// import { eventChannel, END } from "redux-saga";
+import { call, put, takeLatest, takeEvery, all, fork } from "redux-saga/effects";
+import { eventChannel, END } from "redux-saga";
 import { sendEmail, checkStatus } from "lib/api";
 import { sendEmailAction } from "store/actions";
 import * as types from "store/constants";
 
-// function countdown(secs) {
-//   return eventChannel(emitter => {
-//     const iv = setInterval(() => {
-//       secs -= 1;
-//       if (secs > 0) {
-//         emitter(secs);
-//       } else {
-//         emitter(END);
-//       }
-//     }, 1000);
-//     return () => {
-//       clearInterval(iv);
-//     };
-//   });
-// }
+function countdown(secs) {
+  return eventChannel(emitter => {
+    const iv = setInterval(() => {
+      secs -= 1;
+      if (secs > 0) {
+        emitter(secs);
+      } else {
+        emitter(END);
+      }
+    }, 1000);
+    return () => {
+      clearInterval(iv);
+    };
+  });
+}
 
 export function* fetchSendEmail(action) {
   try {
@@ -39,18 +39,8 @@ export function* fetchSendEmail(action) {
 
 export function* fetchCheckStatus(id) {
   try {
-    // const channel = yield call(countdown, 15);
-    // yield takeEvery(channel, function*(secs) {
-    //   const result = yield call(checkStatus, id);
-    //   yield put(
-    //     sendEmailAction.checkStatusSuccess({
-    //       status: result.obj.status,
-    //       id
-    //     })
-    //   );
-    // });
-    let count = 0;
-    while (count > -1) {
+    const channel = yield call(countdown, 15);
+    yield takeEvery(channel, function*(secs) {
       const result = yield call(checkStatus, id);
       yield put(
         sendEmailAction.checkStatusSuccess({
@@ -58,8 +48,18 @@ export function* fetchCheckStatus(id) {
           id
         })
       );
-      count = parseInt(result.obj.status);
-    }
+    });
+    // let count = 0;
+    // while (count > -1) {
+    //   const result = yield call(checkStatus, id);
+    //   yield put(
+    //     sendEmailAction.checkStatusSuccess({
+    //       status: result.obj.status,
+    //       id
+    //     })
+    //   );
+    //   count = parseInt(result.obj.status);
+    // }
   } catch (error) {
     yield put(sendEmailAction.sendEmailFailure("Ошибка отправки сообщения"));
   }

@@ -2,6 +2,7 @@ import * as React from "react";
 import { sendEmailAction } from "store/actions";
 import { connect } from "react-redux";
 import { Home } from "components";
+import { toast } from "react-toastify";
 
 class HomeContainer extends React.Component {
   constructor(props) {
@@ -175,7 +176,7 @@ class HomeContainer extends React.Component {
     this.fileValidation(files)
   };
   fileValidation = (files) => {
-    if (files.size < 5120 && this.totalCapacity(this.state.sizes) < 20480) {
+    if (files.size < 5120 && this.totalCapacity(this.state.sizes) + files.size < 20480) {
       let reader = new FileReader();
       reader.onload = e => {
         this.setState({
@@ -199,7 +200,7 @@ class HomeContainer extends React.Component {
       reader.onerror = error => console.log("Error: ", error);
       reader.readAsDataURL(files);
     } else {
-      console.log("File is too large");
+      toast.error("File is too large", { autoClose: 1500})
     }
   }
   fileDelete = filename => {
@@ -208,7 +209,7 @@ class HomeContainer extends React.Component {
       sizes: this.state.sizes.filter(size => size.name !== filename)
     });
   };
-  totalCapacity = sizes =>
+  totalCapacity = (sizes) =>
     sizes.reduce((acc, value) => {
       return acc + value.size;
     }, 0);
@@ -228,8 +229,9 @@ class HomeContainer extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     this.dragCounter--;
-    if (this.dragCounter > 0) return;
-    this.setState({ dragging: false });
+    if (this.state.dragCounter === 0) {
+      this.setState({ dragging: false });
+    }
   };
   handleDrop = e => {
     e.preventDefault();

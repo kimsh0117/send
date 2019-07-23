@@ -1,6 +1,7 @@
 import React from "react";
 import { clip, clipbig, trash } from "assets/img";
 import { Button } from "components/common";
+
 import "./Form.scss";
 
 const Form = ({
@@ -130,8 +131,7 @@ const Form = ({
         </label>
       </div>
       <Button
-        disabled={checkAll === false}
-        className={checkAll === true ? "button-active" : "button-disable"}
+        className={checkAll === true ? "form__sendbutton" : "form__sendbutton--disable"}
         onClick={send}
       >
         Отправить

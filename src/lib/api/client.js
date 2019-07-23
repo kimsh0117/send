@@ -3,9 +3,9 @@ import Sendsay from "sendsay-api/dist/sendsay-api.cjs";
 let sendsay = new Sendsay();
 
 sendsay.login({
-  login: "creaid1703@gmail.com ",
+  login: process.env.REACT_APP_SENDSAY_ID,
   sublogin: "",
-  password: "chaoo3Y"
+  password: process.env.REACT_APP_SENDSAY_PASSWORD
 });
 
 export default sendsay;
