@@ -14,26 +14,22 @@ class FormContainer extends React.Component {
     attaches: [],
     sizes: []
   };
-  send = values => {
-    console.log("i'am here");
-    // let {
-    //   attaches
-    // } = this.state,
-    //   letter = {
-    //     subject: theme,
-    //     "from.name": namefrom,
-    //     "from.email": emailfrom,
-    //     "to.name": namefor,
-    //     message: { text: content },
-    //     attaches
-    //   },
-    //   mca = [emailfor];
-    // trigger dispatch
-    // this.props.sendEmail(letter, mca);
-    // this.setState({
-    //   attaches: [],
-    //   sizes: []
-    // });
+  sendEmail = values => {
+    let letter = {
+      subject: values.theme,
+      "from.name": values.namefrom,
+      "from.email": values.emailfrom,
+      "to.name": values.namefor,
+      message: { text: values.content },
+      attaches: this.state.attaches
+    };
+    let mca = [values.emailfor];
+
+    this.props.sendEmail(letter, mca);
+    this.setState({
+      attaches: [],
+      sizes: []
+    });
   };
   fileUploadClick = e => {
     fileValidation(e.target.files, this.state.sizes).then(res =>
@@ -70,7 +66,7 @@ class FormContainer extends React.Component {
           <Formik
             validationSchema={validationSchema}
             initialValues={initialState}
-            onSubmit={values => console.log(values)}
+            onSubmit={values => this.sendEmail(values)}
             render={props => (
               <Form
                 {...props}

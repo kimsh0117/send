@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 const cantBeEmpty = "Не может быть пустым";
 const cantBeShort = "Не менее 2 символов";
@@ -11,8 +11,8 @@ const initialState = {
   namefor: "",
   emailfor: "",
   theme: "",
-  content: "",
-}
+  content: ""
+};
 
 const validationSchema = Yup.object({
   namefrom: Yup.string()
@@ -95,7 +95,4 @@ const validationSchema = Yup.object({
 //       break;
 //   }
 // };
-export {
-  validationSchema,
-  initialState
-} ;
+export { validationSchema, initialState };

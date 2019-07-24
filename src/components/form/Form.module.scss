@@ -1,0 +1,232 @@
+@import "~assets/styles/main";
+
+.form {
+  margin-top: 20px;
+  width: 800px;
+  background: $sending__background;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  display: flex;
+  padding: 30px;
+  flex-direction: column;
+}
+.form__title {
+  font-size: 30px;
+  line-height: 40px;
+  width: 693px;
+  height: 40px;
+}
+.form__from,
+.form__for,
+.form__theme,
+.form__message {
+  margin-top: 30px;
+  width: 740px;
+}
+
+.form__from__label,
+.form__for__label,
+.form__theme__label,
+.form__message__label {
+  font-size: 16px;
+  line-height: 20px;
+  height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.form__from__input,
+.form__for__input,
+.form__theme__input {
+  height: 40px;
+  margin-top: 5px;
+}
+.form__from__input__name,
+.form__from__input__email,
+.form__for__input__name,
+.form__for__input__email,
+.form__theme__input__theme {
+  width: 50%;
+  height: 40px;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  padding: 5px 10px;
+}
+
+.form__from__input__name,
+.form__for__input__name {
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.form__from__input__email,
+.form__for__input__email {
+  border-radius: 0 5px 5px 0;
+}
+
+.form__from__input__name:focus,
+.form__from__input__email:focus,
+.form__for__input__name:focus,
+.form__for__input__email:focus,
+.form__theme__input__theme:focus {
+  outline: none;
+  transition: 0.5s;
+}
+.form__from__input__error-message,
+.form__for__input__error-message,
+.form__theme__input__error-message,
+.form__message__error-message {
+  width: 740px;
+  display: flex;
+  flex-direction: row;
+  p {
+    color: #ff6666;
+  }
+}
+.form__from__input__error-message,
+.form__for__input__error-message {
+  p {
+    width: 50%;
+    padding: 5px 10px;
+  }
+}
+
+.form__theme__input__theme,
+.form__message__message {
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.form__theme__input__error-message,
+.form__message__error-message {
+  p {
+    width: 100%;
+    padding: 5px 10px;
+  }
+}
+.form__theme__input__theme {
+  height: 40px;
+  width: 100%;
+}
+.form__message__message {
+  height: 140px;
+  width: 100%;
+  resize: none;
+  &:focus {
+    outline: none;
+  }
+}
+.form__files {
+  width: 740px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.form__files__item {
+  width: 365px;
+  height: 50px;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+}
+
+.form__files__item__img {
+  width: 32.24px;
+  height: 29.41px;
+  margin-left: 10.87px;
+}
+.form__files__item__name {
+  width: 198px;
+  height: 30px;
+  text-align: left;
+  font-size: 16px;
+  margin-left: 15.89px;
+  padding-top: 7px;
+  text-overflow: ellipsis;
+}
+.form__files__item__delete {
+  margin-left: 11px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #ff6666;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+.form__files__item__delete__image {
+  width: 13px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.form__attachment {
+  width: 250px;
+  height: 20px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form__attachment__label {
+  font-size: 16px;
+  line-height: 20px;
+  color: #0055fb;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+.form__attachment__label__input {
+  display: none;
+}
+.form__attachment__label__image {
+  width: 16.12px;
+  height: 14.71px;
+  margin-right: 5.44px;
+}
+
+.form__sendbutton {
+  width: 140px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(180deg, #45a6ff 0%, #0055fb 100%);
+  &:hover {
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.15)
+      ),
+      linear-gradient(180deg, #45a6ff 0%, #0055fb 100%), #c4c4c4;
+  }
+  &:active {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+      linear-gradient(180deg, #45a6ff 0%, #0055fb 100%), #c4c4c4;
+  }
+}
+.form__sendbutton--disable {
+  width: 140px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  color: white;
+  cursor: not-allowed;
+  background: linear-gradient(0deg, #c4c4c4, #c4c4c4),
+    linear-gradient(180deg, #45a6ff 0%, #0055fb 100%);
+}
