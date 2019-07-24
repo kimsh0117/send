@@ -7,11 +7,14 @@ export { MainTemplate } from "components/template";
 // Header
 export { default as Header } from 'components/header';
 
-// Status
-export { default as Status } from 'components/status';
+// Sending
+export { default as Sending } from 'components/sending';
 
 // Progress
 export { default as Progress } from 'components/progress';
 
 // Form
 export { default as Form } from 'components/form';
+
+// DragAndDrop
+export { default as DragAndDrop } from 'components/dragAndDrop';

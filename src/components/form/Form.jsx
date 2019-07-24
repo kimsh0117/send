@@ -1,24 +1,26 @@
 import React from "react";
 import { clip, clipbig, trash } from "assets/img";
 import { Button } from "components/common";
-import { DragAndDropContainer } from "containers";
+import { DragAndDrop } from "components";
 
 import "./Form.scss";
 
 const Form = ({
-  changeInput,
-  validationCheck,
-  valCheckMsg,
-  checkAll,
-  send,
+  values,
+  errors,
+  touched,
+  handleBlur,
+  handleChange,
+  handleSubmit,
+  isSubmitting,
+  handleDrop,
   fileUploadClick,
-  attaches,
   fileDelete,
-  handleDrop
+  attaches,
 }) => {
   return (
-    <div className="form">
-      <DragAndDropContainer handleDrop={handleDrop}>
+    <form className="form" onSubmit={handleSubmit}>
+      <DragAndDrop handleDrop={handleDrop}>
         <div className="form__title">Отправлялка сообщений</div>
         <div className="form__from">
           <label>От кого</label>
@@ -28,21 +30,24 @@ const Form = ({
               id="namefrom"
               placeholder="Имя"
               className="inputs__name"
-              onChange={e => changeInput(0, e)}
-              onBlur={e => validationCheck(0, e)}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.namefrom}
             />
             <input
               type="email"
               id="emailfrom"
               placeholder="Email"
               className="inputs__email"
-              onChange={e => changeInput(1, e)}
-              onBlur={e => validationCheck(1, e)}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.emailfrom}
             />
-          </div>
-          <div className="errMsg">
-            <p>{valCheckMsg[0]}</p>
-            <p>{valCheckMsg[1]}</p>
+            {}
+            <div className="errMsg">
+              {errors.namefrom && touched.namefrom && <p>{errors.namefrom}</p>}
+              {errors.emailfrom && touched.emailfrom && <p>{errors.emailfrom}</p>}
+            </div>
           </div>
         </div>
         <div className="form__for">
@@ -53,21 +58,23 @@ const Form = ({
               id="namefor"
               placeholder="Имя"
               className="inputs__name"
-              onChange={e => changeInput(2, e)}
-              onBlur={e => validationCheck(2, e)}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.namefor}
             />
             <input
               type="email"
               id="emailfor"
               placeholder="Email"
               className="inputs__email"
-              onChange={e => changeInput(3, e)}
-              onBlur={e => validationCheck(3, e)}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.emailfor}
             />
-          </div>
-          <div className="errMsg">
-            <p>{valCheckMsg[2]}</p>
-            <p>{valCheckMsg[3]}</p>
+            <div className="errMsg">
+              {errors.namefor && touched.namefor && <p>{errors.namefor}</p>}
+              {errors.emailfor && touched.emailfor && <p>{errors.emailfor}</p>}
+            </div>
           </div>
         </div>
         <div className="form__theme">
@@ -78,12 +85,13 @@ const Form = ({
               id="theme"
               placeholder="Тема письма"
               className="inputs__theme"
-              onChange={e => changeInput(4, e)}
-              onBlur={e => validationCheck(4, e)}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.theme}
             />
-          </div>
-          <div className="errMsg">
-            <p>{valCheckMsg[4]}</p>
+            <div className="errMsg">
+              {errors.theme && touched.theme && <p>{errors.theme}</p>}
+            </div>
           </div>
         </div>
         <div className="form__message">
@@ -91,11 +99,12 @@ const Form = ({
           <textarea
             id="content"
             className="inputs__message"
-            onChange={e => changeInput(5, e)}
-            onBlur={e => validationCheck(5, e)}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.content}
           />
           <div className="errMsg">
-            <p>{valCheckMsg[5]}</p>
+            {errors.content && touched.content && <p>{errors.content}</p>}
           </div>
         </div>
         <div className="form__files">
@@ -129,15 +138,16 @@ const Form = ({
           </label>
         </div>
         <Button
+          type="submit"
+          disabled={isSubmitting}
           className={
-            checkAll === true ? "form__sendbutton" : "form__sendbutton--disable"
+            isSubmitting ? "form__sendbutton" : "form__sendbutton--disable"
           }
-          onClick={send}
         >
           Отправить
         </Button>
-      </DragAndDropContainer>
-    </div>
+      </DragAndDrop>
+    </form>
   );
 };
 

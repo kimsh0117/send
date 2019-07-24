@@ -2,142 +2,35 @@ import * as React from "react";
 import { sendEmailAction } from "store/actions";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
+import { Formik } from 'formik';
 import { Progress, Form } from "components";
+import { validationSchema, initialState } from "lib/validations/inputsValidation"
 
 class FormContainer extends React.Component {
   state = {
-    namefrom: "",
-    emailfrom: "",
-    namefor: "",
-    emailfor: "",
-    theme: "",
-    content: "",
     attaches: [],
     sizes: [],
-    valCheckMsg: ["", "", "", "", "", ""],
-    checkAll: false,
-    dragging: false
   };
-
-  changeInput = (num, e) => {
-    const checkMsg = [
-      ...this.state.valCheckMsg.slice(0, num),
-      "",
-      ...this.state.valCheckMsg.slice(num + 1)
-    ];
-    const id = e.target.id;
-    const value = e.target.value;
-    this.setState({
-      ...this.state,
-      valCheckMsg: checkMsg,
-      [id]: value
-    });
-  };
-  validationCheck = (num, e) => {
-    const checkMsg = [
-        ...this.state.valCheckMsg.slice(0, num),
-        "",
-        ...this.state.valCheckMsg.slice(num + 1)
-      ],
-      emailCheck = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/,
-      nameCheck = /^[a-zA-Zа-яА-Я]*$/,
-      value = e.target.value.replace(/\s/gi, "");
-
-    switch (num) {
-      case 0:
-        if (value === "") {
-          checkMsg[num] = "Имя не может быть пустым";
-        } else if (!nameCheck.test(value)) {
-          checkMsg[num] = "Please enter correct name format";
-        }
-        break;
-      case 1:
-        if (value === "") {
-          checkMsg[num] = "Email не может быть пустым";
-        } else if (!emailCheck.test(value)) {
-          checkMsg[num] = "Please enter correct email format";
-        }
-        break;
-      case 2:
-        if (value === "") {
-          checkMsg[num] = "Имя не может быть пустым";
-        } else if (!nameCheck.test(value)) {
-          checkMsg[num] = "Please enter correct name format";
-        }
-        break;
-      case 3:
-        if (value === "") {
-          checkMsg[num] = "Email не может быть пустым";
-        } else if (!emailCheck.test(value)) {
-          checkMsg[num] = "Please enter correct email format";
-        }
-        break;
-      case 4:
-        if (value === "") {
-          checkMsg[num] = "Тема письма не может быть пустым";
-        } else if (false) {
-          checkMsg[num] = "Please enter correct theme format";
-        }
-        break;
-      case 5:
-        if (value === "") {
-          checkMsg[num] = "Сообщение не может быть пустым";
-        } else if (false) {
-          checkMsg[num] = "Please enter correct contens format";
-        }
-        break;
-      default:
-        break;
-    }
-    this.setState(
-      {
-        valCheckMsg: checkMsg
-      },
-      this.beforeSend
-    );
-  };
-  beforeSend = () => {
-    if (this.state.valCheckMsg.every(msg => msg === "")) {
-      this.setState({
-        checkAll: true
-      });
-    } else {
-      this.setState({
-        checkAll: false
-      });
-    }
-  };
-  send = () => {
-    let {
-        theme,
-        namefrom,
-        emailfrom,
-        namefor,
-        emailfor,
-        content,
-        attaches
-      } = this.state,
-      letter = {
-        subject: theme,
-        "from.name": namefrom,
-        "from.email": emailfrom,
-        "to.name": namefor,
-        message: { text: content },
-        attaches
-      },
-      mca = [emailfor];
+  send = values => {
+    console.log('i\'am here')
+    // let {
+    //   attaches
+    // } = this.state,
+    //   letter = {
+    //     subject: theme,
+    //     "from.name": namefrom,
+    //     "from.email": emailfrom,
+    //     "to.name": namefor,
+    //     message: { text: content },
+    //     attaches
+    //   },
+    //   mca = [emailfor];
     // trigger dispatch
-    this.props.sendEmail(letter, mca);
-    this.setState({
-      namefrom: "",
-      emailfrom: "",
-      namefor: "",
-      emailfor: "",
-      theme: "",
-      content: "",
-      attaches: [],
-      sizes: []
-    });
+    // this.props.sendEmail(letter, mca);
+    // this.setState({
+    //   attaches: [],
+    //   sizes: []
+    // });
   };
   fileUploadClick = e => {
     let files = e.target.files[0];
@@ -172,7 +65,7 @@ class FormContainer extends React.Component {
     } else {
       toast.error("File is too large", { autoClose: 1500 });
     }
-    
+
   };
   fileDelete = filename => {
     this.setState({
@@ -192,22 +85,21 @@ class FormContainer extends React.Component {
     return (
       <>
         {!this.props.status ? (
-          <Form
-            // methods
-            changeInput={this.changeInput}
-            validationCheck={this.validationCheck}
-            send={this.send}
-            fileUploadClick={this.fileUploadClick}
-            fileDelete={this.fileDelete}
-            handleDrop={this.handleDrop}
-            // states
-            valCheckMsg={this.state.valCheckMsg}
-            checkAll={this.state.checkAll}
-            attaches={this.state.attaches}
+          <Formik
+            validationSchema={validationSchema}
+            initialValues={initialState}
+            onSubmit={values => console.log(values)}
+            render={(props) => <Form
+              {...props}
+              handleDrop={this.handleDrop}
+              fileUploadClick={this.fileUploadClick}
+              fileDelete={this.fileDelete}
+              attaches={this.state.attaches}
+              />}
           />
         ) : (
-          <Progress emailfor={this.props.emailfor} />
-        )}
+            <Progress emailfor={this.props.emailfor} />
+          )}
       </>
     );
   }

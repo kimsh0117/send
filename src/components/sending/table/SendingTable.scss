@@ -1,50 +1,53 @@
-.statustable {
+.sending__table {
   width: 100%;
   margin-top: 20px;
   height: 100px;
-  thead {
-    tr {
-
+  .sending__table__thead {
+    .sending__table__thead__tr {
       border-radius: 5px;
       text-align: left;
       border-bottom: 1px solid #C4C4C4;
       border-radius: 5px;
-      th {
+      .sending__table__thead__tr__th {
         font-size: 16px;
         line-height: 25px;
         color: gray;
         padding-bottom: 10px;
       }
-      th:nth-child(3) {
+      .sending__table__thead__tr__th:nth-child(3) {
         text-align: right;
       }
     }
   }
 
-  tbody {
+  .sending__table__tbody {
     margin-top: 10px;
-    tr {
-      td {
+    .sending__table__tbody__tr {
+      .sending__table__tbody__tr__td {
         font-size: 16px;
         line-height: 25px;
         padding-top: 10px;
       }
-      td:nth-child(1) {
+      .sending__table__tbody__tr__td:nth-child(1) {
         width: 20%;
       }
-      td:nth-child(2) {
+      .sending__table__tbody__tr__td:nth-child(2) {
         width: 60%;
         text-overflow:ellipsis;
       }
-      td:nth-child(3) {
+      .sending__table__tbody__tr__td:nth-child(3) {
         width: 20%;
         text-align: right;
       }
-      .status--failure {
+      .sending__table__tbody__tr__td--failure {
         color:#FF6666ed;
+        width: 20%;
+        text-align: right;
       }
-      .status--success {
+      .sending__table__tbody__tr__td--success {
         color: #03A100;
+        width: 20%;
+        text-align: right;
       }
     }
   }

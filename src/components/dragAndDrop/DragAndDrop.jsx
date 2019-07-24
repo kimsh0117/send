@@ -1,4 +1,5 @@
 import * as React from "react";
+import dragAndDropStyle from "./DragAndDrop.module.scss"
 
 class DragAndDrop extends React.Component {
   state = {
@@ -53,54 +54,16 @@ class DragAndDrop extends React.Component {
   render() {
     return (
       <div
-        style={{ display: "inline-block", position: "relative" }}
         ref={this.dropRef}
+        className={dragAndDropStyle['drag']}
       >
         {this.state.dragging && (
-          <div
-            style={{
-              border: "1px dashed rgb(219, 219, 219)",
-              borderRadius: "5px",
-              backgroundColor: "rgba(255, 255, 255, 0.726)",
-              position: "absolute",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              zIndex: 9999,
-              transition: "all .5s"
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                right: 0,
-                left: 0,
-                textAlign: "center",
-                color: "grey",
-                fontSize: 36
-              }}
-            >
-              <p
-                style={{
-                  fontSize: "30px",
-                  lineHeight: "40px",
-                  width: "693px",
-                  height: "40px",
-                  textAlign: "center"
-                }}
-              >
+          <div className={dragAndDropStyle['drag__inner']}>
+            <div className={dragAndDropStyle['drag__inner__content']}>
+              <p className={dragAndDropStyle['drag__inner__content__title']}>
                 Бросайте файлы сюда, я ловлю
               </p>
-              <span
-                style={{
-                  width: "600px",
-                  textAlign: "center",
-                  fontSize: "16px",
-                  lineHeight: "25px"
-                }}
-              >
+              <span className={dragAndDropStyle['drag__inner__content__description']}>
                 Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls,
                 pdf) и zip-архивы. Размеры файла до 5 МБ
               </span>

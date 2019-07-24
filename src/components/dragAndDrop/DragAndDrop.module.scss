@@ -1,0 +1,40 @@
+.drag {
+  display: inline-block;
+  position: relative;
+}
+.drag__inner {
+  border: 1px dashed rgb(219, 219, 219);
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.726);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  transition: all .5s;
+}
+.drag__inner__content {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  text-align: center;
+  color: grey;
+  font-size: 36px;
+}
+
+.drag__inner__content__title {
+  font-size: 30px;
+  line-height: 40px;
+  width: 693px;
+  height: 40px;
+  text-align: center;
+}
+
+.drag__inner__content__description {
+  width: 600px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 25px;
+}
