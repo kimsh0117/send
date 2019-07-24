@@ -1,18 +1,21 @@
 import * as React from "react";
 import { sendEmailAction } from "store/actions";
 import { connect } from "react-redux";
-import { Formik } from 'formik';
+import { Formik } from "formik";
 import { Progress, Form } from "components";
-import { validationSchema, initialState } from "lib/validations/inputsValidation"
-import { fileValidation } from "lib/validations/fileValidation"
+import {
+  validationSchema,
+  initialState
+} from "lib/validations/inputsValidation";
+import { fileValidation } from "lib/validations/fileValidation";
 
 class FormContainer extends React.Component {
   state = {
     attaches: [],
-    sizes: [],
+    sizes: []
   };
   send = values => {
-    console.log('i\'am here')
+    console.log("i'am here");
     // let {
     //   attaches
     // } = this.state,
@@ -33,17 +36,14 @@ class FormContainer extends React.Component {
     // });
   };
   fileUploadClick = e => {
-    fileValidation(e.target.files, this.state.sizes)
-      .then(res => this.setState({
-        attaches: [
-          ...this.state.attaches,
-          res.attaches
-        ],
-        sizes: [
-          ...this.state.sizes,
-          res.sizes
-        ]
-      }))
+    fileValidation(e.target.files, this.state.sizes).then(res =>
+      res !== null
+        ? this.setState({
+            attaches: [...this.state.attaches, res.attaches],
+            sizes: [...this.state.sizes, res.sizes]
+          })
+        : ""
+    );
   };
 
   fileDelete = filename => {
@@ -53,18 +53,15 @@ class FormContainer extends React.Component {
     });
   };
 
-  handleDrop = (files) => {
-    fileValidation(files, this.state.sizes)
-      .then(res => this.setState({
-        attaches: [
-          ...this.state.attaches,
-          res.attaches
-        ],
-        sizes: [
-          ...this.state.sizes,
-          res.sizes
-        ]
-      }))
+  handleDrop = files => {
+    fileValidation(files, this.state.sizes).then(res =>
+      res !== null
+        ? this.setState({
+            attaches: [...this.state.attaches, res.attaches],
+            sizes: [...this.state.sizes, res.sizes]
+          })
+        : ""
+    );
   };
   render() {
     return (
@@ -74,17 +71,19 @@ class FormContainer extends React.Component {
             validationSchema={validationSchema}
             initialValues={initialState}
             onSubmit={values => console.log(values)}
-            render={(props) => <Form
-              {...props}
-              handleDrop={this.handleDrop}
-              fileUploadClick={this.fileUploadClick}
-              fileDelete={this.fileDelete}
-              attaches={this.state.attaches}
-            />}
+            render={props => (
+              <Form
+                {...props}
+                handleDrop={this.handleDrop}
+                fileUploadClick={this.fileUploadClick}
+                fileDelete={this.fileDelete}
+                attaches={this.state.attaches}
+              />
+            )}
           />
         ) : (
-            <Progress emailfor={this.props.emailfor} />
-          )}
+          <Progress emailfor={this.props.emailfor} />
+        )}
       </>
     );
   }

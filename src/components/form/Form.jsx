@@ -16,7 +16,7 @@ const Form = ({
   handleDrop,
   fileUploadClick,
   fileDelete,
-  attaches,
+  attaches
 }) => {
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -46,7 +46,9 @@ const Form = ({
             {}
             <div className="errMsg">
               {errors.namefrom && touched.namefrom && <p>{errors.namefrom}</p>}
-              {errors.emailfrom && touched.emailfrom && <p>{errors.emailfrom}</p>}
+              {errors.emailfrom && touched.emailfrom && (
+                <p>{errors.emailfrom}</p>
+              )}
             </div>
           </div>
         </div>
