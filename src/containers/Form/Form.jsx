@@ -3,10 +3,7 @@ import { sendEmailAction } from "store/actions";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import { Progress, Form } from "components";
-import {
-  validationSchema,
-  initialState
-} from "lib/validations/inputsValidation";
+import { validationSchema } from "lib/validations/inputsValidation";
 import { fileValidation } from "lib/validations/fileValidation";
 
 class FormContainer extends React.Component {
@@ -14,7 +11,7 @@ class FormContainer extends React.Component {
     attaches: [],
     sizes: []
   };
-  sendEmail = values => {
+  sendEmail = (values, { setSubmitting }) => {
     let letter = {
       subject: values.theme,
       "from.name": values.namefrom,
@@ -24,12 +21,12 @@ class FormContainer extends React.Component {
       attaches: this.state.attaches
     };
     let mca = [values.emailfor];
-
     this.props.sendEmail(letter, mca);
     this.setState({
       attaches: [],
       sizes: []
     });
+    setSubmitting(false);
   };
   fileUploadClick = e => {
     fileValidation(e.target.files, this.state.sizes).then(res =>
@@ -65,8 +62,15 @@ class FormContainer extends React.Component {
         {!this.props.status ? (
           <Formik
             validationSchema={validationSchema}
-            initialValues={initialState}
-            onSubmit={values => this.sendEmail(values)}
+            initialValues={{
+              namefrom: "",
+              emailfrom: "",
+              namefor: "",
+              emailfor: "",
+              theme: "",
+              content: ""
+            }}
+            onSubmit={this.sendEmail}
             render={props => (
               <Form
                 {...props}

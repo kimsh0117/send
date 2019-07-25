@@ -39,7 +39,7 @@ export function* fetchSendEmail(action) {
 
 export function* fetchCheckStatus(id) {
   try {
-    const channel = yield call(countdown, 20);
+    const channel = yield call(countdown, 17);
     yield takeEvery(channel, function*(secs) {
       const result = yield call(checkStatus, id);
       yield put(
@@ -49,17 +49,6 @@ export function* fetchCheckStatus(id) {
         })
       );
     });
-    // let count = 0;
-    // while (count > -1) {
-    //   const result = yield call(checkStatus, id);
-    //   yield put(
-    //     sendEmailAction.checkStatusSuccess({
-    //       status: result.obj.status,
-    //       id
-    //     })
-    //   );
-    //   count = parseInt(result.obj.status);
-    // }
   } catch (error) {
     yield put(sendEmailAction.sendEmailFailure("Ошибка отправки сообщения"));
   }

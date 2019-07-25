@@ -2,7 +2,6 @@ import React from "react";
 import { clip, clipbig, trash } from "assets/img";
 import { Button } from "components/common";
 import { DragAndDrop } from "components";
-
 import formStyles from "./Form.module.scss";
 
 const Form = ({
@@ -27,7 +26,7 @@ const Form = ({
           <div className={formStyles["form__from__input"]}>
             <input
               type="text"
-              id="namefrom"
+              name="namefrom"
               placeholder="Имя"
               className={formStyles["form__from__input__name"]}
               onChange={handleChange}
@@ -36,7 +35,7 @@ const Form = ({
             />
             <input
               type="email"
-              id="emailfrom"
+              name="emailfrom"
               placeholder="Email"
               className={formStyles["form__from__input__email"]}
               onChange={handleChange}
@@ -44,9 +43,15 @@ const Form = ({
               value={values.emailfrom}
             />
             <div className={formStyles["form__from__input__error-message"]}>
-              {errors.namefrom && touched.namefrom && <p>{errors.namefrom}</p>}
-              {errors.emailfrom && touched.emailfrom && (
+              {errors.namefrom && touched.namefrom ? (
+                <p>{errors.namefrom}</p>
+              ) : (
+                <p />
+              )}
+              {errors.emailfrom && touched.emailfrom ? (
                 <p>{errors.emailfrom}</p>
+              ) : (
+                <p />
               )}
             </div>
           </div>
@@ -56,7 +61,7 @@ const Form = ({
           <div className={formStyles["form__for__input"]}>
             <input
               type="text"
-              id="namefor"
+              name="namefor"
               placeholder="Имя"
               className={formStyles["form__for__input__name"]}
               onChange={handleChange}
@@ -65,7 +70,7 @@ const Form = ({
             />
             <input
               type="email"
-              id="emailfor"
+              name="emailfor"
               placeholder="Email"
               className={formStyles["form__for__input__email"]}
               onChange={handleChange}
@@ -73,8 +78,16 @@ const Form = ({
               value={values.emailfor}
             />
             <div className={formStyles["form__for__input__error-message"]}>
-              {errors.namefor && touched.namefor && <p>{errors.namefor}</p>}
-              {errors.emailfor && touched.emailfor && <p>{errors.emailfor}</p>}
+              {errors.namefor && touched.namefor ? (
+                <p>{errors.namefor}</p>
+              ) : (
+                <p />
+              )}
+              {errors.emailfor && touched.emailfor ? (
+                <p>{errors.emailfor}</p>
+              ) : (
+                <p />
+              )}
             </div>
           </div>
         </div>
@@ -85,7 +98,7 @@ const Form = ({
           <div className={formStyles["form__theme__input"]}>
             <input
               type="text"
-              id="theme"
+              name="theme"
               placeholder="Тема письма"
               className={formStyles["form__theme__input__theme"]}
               onChange={handleChange}
@@ -93,7 +106,7 @@ const Form = ({
               value={values.theme}
             />
             <div className={formStyles["form__theme__input__error-message"]}>
-              {errors.theme && touched.theme && <p>{errors.theme}</p>}
+              {errors.theme && touched.theme ? <p>{errors.theme}</p> : <p />}
             </div>
           </div>
         </div>
@@ -102,14 +115,18 @@ const Form = ({
             Сообщение
           </label>
           <textarea
-            id="content"
+            name="content"
             className={formStyles["form__message__message"]}
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.content}
           />
           <div className={formStyles["form__message__error-message"]}>
-            {errors.content && touched.content && <p>{errors.content}</p>}
+            {errors.content && touched.content ? (
+              <p>{errors.content}</p>
+            ) : (
+              <p />
+            )}
           </div>
         </div>
         <div className={formStyles["form__files"]}>
@@ -156,13 +173,9 @@ const Form = ({
         <Button
           type="submit"
           disabled={isSubmitting}
-          className={
-            isSubmitting
-              ? formStyles["form__sendbutton"]
-              : formStyles["form__sendbutton--disable"]
-          }
+          className={formStyles["form__send-button"]}
         >
-          Отправить
+         {isSubmitting ? 'Отправляет' : 'Отправить'}
         </Button>
       </DragAndDrop>
     </form>
