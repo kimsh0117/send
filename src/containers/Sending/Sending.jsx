@@ -3,14 +3,7 @@ import { connect } from "react-redux";
 import { Sending } from "components";
 
 class SendingContainer extends React.Component {
-  render() {
-    const { messages } = this.props;
-    return (
-      <>
-        <Sending messages={messages} />
-      </>
-    );
-  }
+  render = () => <Sending messages={this.props.messages} />
 }
 
 const mapStateToProps = rootState => ({
