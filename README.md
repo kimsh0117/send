@@ -45,6 +45,18 @@ Sendsay front-end test.
 ## Deploy
 [Netlify](https://gracious-hawking-e8c7c6.netlify.com/)
 
+
+## Start Application
+### You must specify the SenddayAPI key for the application to work properly
+
+1. Create .env.development.local or .env in root directory
+
+2. Specify a key in the line.
+````
+REACT_APP_SENDSAY_ID=SENDSAY_ID
+REACT_APP_SENDSAY_PASSWORD=SENDSAY_PASSWORD
+````
+
 ## Available Scripts
 
 In the project directory, you can run:
