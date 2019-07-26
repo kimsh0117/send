@@ -1,3 +1,5 @@
+@import "~assets/styles/main";
+
 .progress {
   margin-top: 20px;
   width: 800px;
@@ -8,7 +10,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-
+  @include animation('fade-in 1s');
+  
   .progress__title {
     width: 693px;
     margin-top: 110px;

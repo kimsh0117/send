@@ -1,5 +1,8 @@
+@import "~assets/styles/main";
+
 header {
   display: flex;
   height: 100px;
   align-items: flex-end;
+  @include animation('fade-in 1s');
 }

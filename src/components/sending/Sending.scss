@@ -1,3 +1,5 @@
+@import '~assets/styles/utils';
+
 .sending {
   margin-top: 50px;
   width: 800px;
@@ -5,7 +7,8 @@
   justify-content: center;
   flex-direction: column;
   padding: 0 30px;
-  
+  @include animation('fade-in 1s');
+
   .sending__title {
     width: 740px;
     height: 30px;
