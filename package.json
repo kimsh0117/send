@@ -12,7 +12,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "formik": "^1.5.8",
     "include-media": "^1.4.9",
