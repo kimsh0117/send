@@ -19,19 +19,19 @@ function readFileAsync(files) {
 async function fileValidation(files, sizes) {
   try {
     if (files[0].size > 5120) {
-      toast.info("File size exceeds 5 MB", { autoClose: 2000 });
+      toast.info("Размер файла превышает 5МБ", { autoClose: 2000 });
       return null;
     }
 
     if (totalCapacity(sizes) + files[0].size > 20480) {
-      toast.info("The size of the file exceeds the maximum capacity of 20 MB", {
+      toast.info("Размер файла превышает максимальный объем 20 МБ", {
         autoClose: 2000
       });
       return null;
     }
 
     if (isUnique(sizes, files[0].name)) {
-      toast.info("File already exists", { autoClose: 2000 });
+      toast.info("Файл уже существует", { autoClose: 2000 });
       return null;
     } else {
       let contentBuffer = await readFileAsync(files[0]);
