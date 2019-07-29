@@ -163,7 +163,7 @@ const Form = ({
             />
             <input
               type="file"
-              accept="image/*,.doc,.docx,.xls,.xlsx,application/pdf,application/zip,.txt,.rtf"
+              accept="image/gif, image/jpg, image/png, .doc, .xls, application/pdf, application/zip"
               onChange={fileUploadClick}
               className={formStyles["form__attachment__label__input"]}
             />
