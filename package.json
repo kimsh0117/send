@@ -16,7 +16,7 @@
     "classnames": "^2.2.6",
     "formik": "^1.5.8",
     "include-media": "^1.4.9",
-    "node-sass": "^4.14",
+    "node-sass": "^4.13",
     "react": "17.0.1",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
