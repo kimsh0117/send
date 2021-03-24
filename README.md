@@ -43,7 +43,8 @@ Sendsay front-end test.
 
 
 ## Deploy
-[Netlify](https://gracious-hawking-e8c7c6.netlify.com/)
+Deployed on Netlify<br>
+[Send](https://sandsay.netlify.app/) <- click here
 
 
 ## Start Application
