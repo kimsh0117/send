@@ -17,9 +17,10 @@ function readFileAsync(files) {
 }
 
 async function fileValidation(files, sizes) {
-    let type = files[0].name.split('.')[1];
+    let filePath = files[0].name.split('.')[1];
+    var allowedExtensions = /(\.doc|\.docx|\.pdf|\.zip|\.jpg|\.png|\.gif|\.jpeg|\.xls)$/i;
     try {
-        if (type !== 'zip' && type !== 'jpg' && type !== 'png' && type !== 'gif' && type !== 'jpeg' && type !== 'doc' && type !== 'pdf' && type !== 'xls') {
+        if (allowedExtensions.exec(filePath)) {
             toast.info("File type only jpg, png, gif, doc, pdf, xls, zip", { autoClose: 2000 });
             return null;
         }
