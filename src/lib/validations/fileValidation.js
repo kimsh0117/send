@@ -17,15 +17,18 @@ function readFileAsync(files) {
 }
 
 async function fileValidation(files, sizes) {
-    console.log(files)
-    console.log(sizes)
+    let type = files[0].name.split('.')[1];
     try {
-        if (files[0].size > 5120) {
+        if (type !== 'zip' && type !== 'jpg' && type !== 'png' && type !== 'gif' && type !== 'jpeg' && type !== 'doc' && type !== 'pdf' && type !== 'xls') {
+            toast.info("File type only jpg, png, gif, doc, pdf, xls, zip", { autoClose: 2000 });
+            return null;
+        }
+        if (Math.floor(files[0].size / 1024) > 5120) {
             toast.info("File size exceeds 5 MB", { autoClose: 2000 });
             return null;
         }
 
-        if (totalCapacity(sizes) + files[0].size > 20480) {
+        if (totalCapacity(sizes) + Math.floor(files[0].size / 1024) > 20480) {
             toast.info("The size of the file exceeds the maximum capacity of 20 MB", {
                 autoClose: 2000
             });
