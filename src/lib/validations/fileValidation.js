@@ -49,7 +49,7 @@ async function fileValidation(files, sizes) {
                 },
                 sizes: {
                     name: files[0].name,
-                    size: files[0].size
+                    size: Math.floor(files[0].size / 1024)
                 }
             };
         }
