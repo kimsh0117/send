@@ -48,7 +48,7 @@ Deployed on Netlify<br>
 
 
 ## Start Application
-### You must specify the SenddayAPI key for the application to work properly
+### You must specify the SendsayAPI key for the application to work properly
 
 1. Create .env.development.local or .env in root directory
 
